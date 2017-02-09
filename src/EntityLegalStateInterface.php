@@ -19,4 +19,14 @@ interface EntityLegalStateInterface {
    */
   public function getPublishedVersion(EntityLegalDocumentInterface $legal_document, $version_value);
 
+  /**
+   * Update the published version in state.
+   *
+   * @param \Drupal\entity_legal\EntityLegalDocumentInterface $legal_document
+   *   The legal document config entity.
+   * @param string $version_value
+   *   The EntityLegalDocumentVersion ID to save.
+   */
+  public function updateStateVersion(EntityLegalDocumentInterface $legal_document, $version_value);
+
 }

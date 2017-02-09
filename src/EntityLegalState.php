@@ -55,6 +55,7 @@ class EntityLegalState implements EntityLegalStateInterface {
 
   /**
    * Get the published version from state.
+   * @TODO: add to interface
    *
    * @param \Drupal\entity_legal\EntityLegalDocumentInterface $legal_document
    *   The legal document config entity.
@@ -62,7 +63,7 @@ class EntityLegalState implements EntityLegalStateInterface {
    * @return string
    *   The ID of the published EntityLegalDocumentVersion entity.
    */
-  protected function getStateVersion(EntityLegalDocumentInterface $legal_document) {
+  public function getStateVersion(EntityLegalDocumentInterface $legal_document) {
     $version_from_state = $this->state->get('entity_legal_state.' . $legal_document->id());
     // If empty, retrieve a fake placeholder, to avoid changes to config entity.
     if (!$version_from_state) {
@@ -72,14 +73,9 @@ class EntityLegalState implements EntityLegalStateInterface {
   }
 
   /**
-   * Update the published version in state.
-   *
-   * @param \Drupal\entity_legal\EntityLegalDocumentInterface $legal_document
-   *   The legal document config entity.
-   * @param string $version_value
-   *   The EntityLegalDocumentVersion ID to save.
+   * {@inheritdoc}
    */
-  protected function updateStateVersion(EntityLegalDocumentInterface $legal_document, $version_value) {
+  public function updateStateVersion(EntityLegalDocumentInterface $legal_document, $version_value) {
     $this->state->set('entity_legal_state.' . $legal_document->id(), $version_value);
   }
 
