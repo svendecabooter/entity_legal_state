@@ -13,3 +13,8 @@ different environments.
 
 Just enable the module, and document's published versions will be stored via
 the Drupal State API instead.
+
+# References
+
+See https://www.drupal.org/node/2851159 for the issue in the entity_legal 
+queue discussing the use case for this module in more detail.
