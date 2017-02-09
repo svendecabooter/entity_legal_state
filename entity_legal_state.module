@@ -12,7 +12,7 @@ use Drupal\entity_legal\EntityLegalDocumentInterface;
  */
 function entity_legal_state_entity_legal_published_version_alter(&$published_version_name, EntityLegalDocumentInterface $legal_document) {
   $published_version_name = \Drupal::service('entity_legal_state')
-    ->getPublishedVersion($legal_document, $published_version_name);
+    ->getStateVersion($legal_document);
 }
 
 /**

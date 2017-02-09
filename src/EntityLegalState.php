@@ -38,35 +38,6 @@ class EntityLegalState implements EntityLegalStateInterface {
   /**
    * {@inheritdoc}
    */
-  public function getPublishedVersion(EntityLegalDocumentInterface $legal_document, $version_value) {
-    if ($version_value == NULL) {
-      // Retrieve the current version of the document.
-      return $this->getStateVersion($legal_document);
-    }
-    else {
-      // Check whether to change published version or not.
-      if ($version_value != $this->getStateVersion($legal_document)) {
-        // New published version is set in the entity. We need to update state.
-        $this->updateStateVersion($legal_document, $version_value);
-      }
-      return $version_value;
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function updatePublishedVersion(EntityLegalDocumentInterface $legal_document) {
-    $state_value = $this->getPublishedVersion($legal_document, NULL);
-    $entity_value = $legal_document->get('published_version');
-    if ($state_value != $entity_value) {
-      $this->updateStateVersion($legal_document, $entity_value);
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function getStateVersion(EntityLegalDocumentInterface $legal_document) {
     return $this->state->get('entity_legal_state.' . $legal_document->id());
   }
@@ -76,6 +47,17 @@ class EntityLegalState implements EntityLegalStateInterface {
    */
   public function updateStateVersion(EntityLegalDocumentInterface $legal_document, $version_value) {
     $this->state->set('entity_legal_state.' . $legal_document->id(), $version_value);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function updatePublishedVersion(EntityLegalDocumentInterface $legal_document) {
+    $state_value = $this->getStateVersion($legal_document);
+    $entity_value = $legal_document->get('published_version');
+    if ($state_value != $entity_value) {
+      $this->updateStateVersion($legal_document, $entity_value);
+    }
   }
 
 }
