@@ -36,3 +36,12 @@ function entity_legal_state_entity_presave(EntityInterface $entity) {
     $entity->set('published_version', NULL);
   }
 }
+
+/**
+ * Implements hook_entity_delete().
+ */
+function entity_legal_state_entity_delete(EntityInterface $entity) {
+  if ($entity instanceof EntityLegalDocumentInterface) {
+    \Drupal::service('entity_legal_state')->deleteStateVersion($entity);
+  }
+}

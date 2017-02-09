@@ -52,6 +52,13 @@ class EntityLegalState implements EntityLegalStateInterface {
   /**
    * {@inheritdoc}
    */
+  public function deleteStateVersion(EntityLegalDocumentInterface $legal_document) {
+    $this->state->delete('entity_legal_state.' . $legal_document->id());
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function updatePublishedVersion(EntityLegalDocumentInterface $legal_document) {
     $state_value = $this->getStateVersion($legal_document);
     $entity_value = $legal_document->get('published_version');
