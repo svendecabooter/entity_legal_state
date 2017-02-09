@@ -1,13 +1,5 @@
 <?php
 
-/**
- * @file
- * Adds extra functionality to the entity_legal module.
- *
- * Stores entity_legal published version config in state rather than config
- * entities.
- */
-
 namespace Drupal\entity_legal_state;
 
 use Drupal\Core\State\StateInterface;
@@ -16,11 +8,16 @@ use Drupal\entity_legal\EntityLegalDocumentInterface;
 /**
  * EntityLegalState service.
  *
+ * Stores entity_legal published version config in state rather than config
+ * entities.
+ *
  * @package Drupal\entity_legal_state
  */
 class EntityLegalState implements EntityLegalStateInterface {
 
   /**
+   * The state service.
+   *
    * @var \Drupal\Core\State\StateInterface
    */
   protected $state;
@@ -29,7 +26,7 @@ class EntityLegalState implements EntityLegalStateInterface {
    * EntityLegalState constructor.
    *
    * @param \Drupal\Core\State\StateInterface $state
-   *  The state service.
+   *   The state service.
    */
   public function __construct(StateInterface $state) {
     $this->state = $state;

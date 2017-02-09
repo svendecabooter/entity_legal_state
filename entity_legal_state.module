@@ -1,7 +1,8 @@
 <?php
+
 /**
  * @file
- * Stores entity_legal document published version info in state rather than config entity.
+ * Stores entity_legal document published version info in state.
  */
 
 use Drupal\Core\Entity\EntityInterface;

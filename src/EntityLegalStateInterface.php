@@ -4,6 +4,9 @@ namespace Drupal\entity_legal_state;
 
 use Drupal\entity_legal\EntityLegalDocumentInterface;
 
+/**
+ * EntityLegalState service interface.
+ */
 interface EntityLegalStateInterface {
 
   /**

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entity_legal_state\Form\EntityLegalStateDocumentVersionForm.
- */
-
 namespace Drupal\entity_legal_state\Form;
 
 use Drupal\entity_legal\Form\EntityLegalDocumentVersionForm;
