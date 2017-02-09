@@ -39,7 +39,7 @@ class EntityLegalState implements EntityLegalStateInterface {
    * {@inheritdoc}
    */
   public function getPublishedVersion(EntityLegalDocumentInterface $legal_document, $version_value) {
-    if ($version_value == NULL || $version_value == 'retrieve_from_state') {
+    if ($version_value == NULL) {
       // Retrieve the current version of the document.
       return $this->getStateVersion($legal_document);
     }
@@ -54,22 +54,21 @@ class EntityLegalState implements EntityLegalStateInterface {
   }
 
   /**
-   * Get the published version from state.
-   * @TODO: add to interface
-   *
-   * @param \Drupal\entity_legal\EntityLegalDocumentInterface $legal_document
-   *   The legal document config entity.
-   *
-   * @return string
-   *   The ID of the published EntityLegalDocumentVersion entity.
+   * {@inheritdoc}
+   */
+  public function updatePublishedVersion(EntityLegalDocumentInterface $legal_document) {
+    $state_value = $this->getPublishedVersion($legal_document, NULL);
+    $entity_value = $legal_document->get('published_version');
+    if ($state_value != $entity_value) {
+      $this->updateStateVersion($legal_document, $entity_value);
+    }
+  }
+
+  /**
+   * {@inheritdoc}
    */
   public function getStateVersion(EntityLegalDocumentInterface $legal_document) {
-    $version_from_state = $this->state->get('entity_legal_state.' . $legal_document->id());
-    // If empty, retrieve a fake placeholder, to avoid changes to config entity.
-    if (!$version_from_state) {
-      $version_from_state = 'retrieve_from_state';
-    }
-    return $version_from_state;
+    return $this->state->get('entity_legal_state.' . $legal_document->id());
   }
 
   /**

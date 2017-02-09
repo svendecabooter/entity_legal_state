@@ -29,11 +29,9 @@ function entity_legal_state_entity_type_alter(array &$entity_types) {
  */
 function entity_legal_state_entity_presave(EntityInterface $entity) {
   if ($entity instanceof EntityLegalDocumentInterface) {
-    $state_value = \Drupal::service('entity_legal_state')->getPublishedVersion($entity, NULL);
-    $entity_value = $entity->get('published_version');
-    if ($state_value != $entity_value) {
-      \Drupal::service('entity_legal_state')->updateStateVersion($entity, $entity_value);
-    }
+    // Update state with new published_version if appropriate.
+    \Drupal::service('entity_legal_state')->updatePublishedVersion($entity);
+
     // Don't save published_version value in the config entity.
     $entity->set('published_version', NULL);
   }
